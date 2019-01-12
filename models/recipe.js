@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-  var Recipe = sequelize.define("Post", {
+  var Recipe = sequelize.define("Recipe", {
     title: {
       type: DataTypes.STRING,
       allowNull: false,
