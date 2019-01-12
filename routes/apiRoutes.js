@@ -14,15 +14,15 @@ module.exports = function(app) {
       title: req.body.title,
       foodType: req.body.foodType,
       ingredient1: req.body.ingredient1,
-      ingredient2: req.body.ingredient1,
-      ingredient3: req.body.ingredient1,
-      ingredient4: req.body.ingredient1,
-      ingredient5: req.body.ingredient1,
-      ingredient6: req.body.ingredient1,
-      ingredient7: req.body.ingredient1,
-      ingredient8: req.body.ingredient1,
-      ingredient9: req.body.ingredient1,
-      ingredient10: req.body.ingredient1
+      ingredient2: req.body.ingredient2,
+      ingredient3: req.body.ingredient3,
+      ingredient4: req.body.ingredient4,
+      ingredient5: req.body.ingredient5,
+      ingredient6: req.body.ingredient6,
+      ingredient7: req.body.ingredient7,
+      ingredient8: req.body.ingredient8,
+      ingredient9: req.body.ingredient9,
+      ingredient10: req.body.ingredient10
     }).then(function(dbRecipe) {
       res.json(dbRecipe);
     });
