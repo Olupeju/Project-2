@@ -7,7 +7,7 @@
         <h1>On-The-Go Recipes</h1>
       </div>
       <div class="col-sm-3">
-        <a href="/recipe">
+        <a href="/add">
           <button type="button" class="btn btn-primary btn-lg">Add New Recipe</button>
         </a>
       </div>
@@ -18,7 +18,7 @@
         <h3>Current Recipes</h3>
         <ul id="recipeList">
           {{#each recipes}}
-          <li data-id="{{this.id}}">{{title}}</li>
+          <li data-id="{{this.id}}"><a href="/recipe">{{title}}</a></li>
           {{/each}}
         </ul>
       </div>
