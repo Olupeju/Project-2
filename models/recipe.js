@@ -8,39 +8,26 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     foodType: {
-      type: DataTypes.TEXT,
-      allowNull: false
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [1]
+      }
     },
-    ingredient1: {
-      type: DataTypes.STRING
-    },
-    ingredient2: {
-      type: DataTypes.STRING
-    },
-    ingredient3: {
-      type: DataTypes.STRING
-    },
-    ingredient4: {
-      type: DataTypes.STRING
-    },
-    ingredient5: {
-      type: DataTypes.STRING
-    },
-    ingredient6: {
-      type: DataTypes.STRING
-    },
-    ingredient7: {
-      type: DataTypes.STRING
-    },
-    ingredient8: {
-      type: DataTypes.STRING
-    },
-    ingredient9: {
-      type: DataTypes.STRING
-    },
-    ingredient10: {
-      type: DataTypes.STRING
+    description: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [1]
+      }
     }
   });
+  Recipe.associate = function(models) {
+    // Associating Author with Posts
+    // When an Author is deleted, also delete any associated Posts
+    Recipe.hasMany(models.Ingredients, {
+      onDelete: "cascade"
+    });
+  };
   return Recipe;
 };
