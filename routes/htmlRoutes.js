@@ -12,8 +12,8 @@ module.exports = function(app) {
   });
 
   // Load example page and pass in an example by id
-  app.get("/recipe", function(req, res) {
-    res.render("recipe");
+  app.get("/add", function(req, res) {
+    res.render("add");
     //db.Recipe.findOne({ where: { id: req.params.id } }).then(function(
     //  dbRecipes
     //) {
@@ -23,8 +23,8 @@ module.exports = function(app) {
     //});
   });
 
-  app.get("/ingredients", function(req, res) {
-    res.render("ingredients");
+  app.get("/recipe/", function(req, res) {
+    res.render("recipe");
   });
 
   // Render 404 page for any unmatched routes
