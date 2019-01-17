@@ -45,9 +45,9 @@
 
 <script>
   var ingredientNum = 2;
-  var ingredientId = "ingredient" + ingredientNum;
   $("#addIngredient").on("click", function() {
     event.preventDefault();
+    var ingredientId = "ingredient" + ingredientNum;
     var newIngredient = $("<input class='form-control' id='" + ingredientId + "'>");
     $("#ingredients").append(newIngredient);
     ingredientNum++;
