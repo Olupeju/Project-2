@@ -12,19 +12,15 @@
   </div>
 
    <div class="row">
-    <div class="col-sm-9">
-      <div class="form-group">
-        <form>
-          <label for="title">Recipe Title</label>
-            <input name="title" class="form-control" id="title">
-          </form>
+    <div class="col-sm-9"
+      <form>
+        <div class="form-group">
+          <label>Name Your Recipe</label>
+          <input type="text" class="form-control" id="recipeName">
         </div>
-      </div>
-    <div class="col-sm-3">
-      <div class="form-group">
-        <form>
-          <label for="foodType">Food Type</label>
-          <select name="foodType" id="foodType">
+        <div class="form-group">
+          <label>Food Type</label>
+          <select class="form-control" id="foodType">
             <option value="Italian">Italian</option>
             <option value="Asian">Asian</option>
             <option value="African">African</option>
@@ -33,19 +29,28 @@
             <option value="American">American</option>
             <option value="Other">Other</option>
           </select>
-        </form>
-      </div>
+        </div>
+        <div class="form-group" id="ingredients">
+          <label>Add Ingredients</label>
+          <input class="form-control" id="ingredient1">
+        </div>
+        <button class="btn btn-primary btn-sm" type="button" id="addIngredient">Add Another Ingredient</button>
+        <br>
+        <br>
+        <button class="btn btn-primary btn-lg" type="submit" action="/api/recipes" method="post">Submit</buttom>
+      </form>
     </div>
   </div>
-    
-  <h3>Add Ingredients</h2>
-  <div class = "ingredientList">
-  </div>
-  <div class="form-group">
-    <form>
-      <label for="ingredient">Ingredient</label>
-      <input name="ingredient" class="form-control" id="ingredient">
-    </form>
-  </div>
-    <button type="button" class="btn btn-primary btn-lg">Submit</button>
 </div>
+
+<script>
+  var ingredientNum = 2;
+  $("#addIngredient").on("click", function() {
+    event.preventDefault();
+    var ingredientId = "ingredient" + ingredientNum;
+    var newIngredient = $("<input class='form-control' id='" + ingredientId + "'>");
+    $("#ingredients").append(newIngredient);
+    ingredientNum++;
+    console.log(newIngredient);
+  });
+</script>
