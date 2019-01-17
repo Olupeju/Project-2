@@ -16,9 +16,9 @@
     <div class="row">
       <div class="col-sm-12">
         <h3>Current Recipes</h3>
-        <ul id="recipeList">
+        <ul>
           {{#each recipes}}
-          <li data-id="{{this.id}}"><a href="/recipe">{{title}}</a></li>
+          <li class="recipeList" data-id="{{this.id}}"><a id="recipeLink" href="/recipe?recipe_id=">{{title}}</a></li>
           {{/each}}
         </ul>
       </div>
@@ -26,3 +26,8 @@
 
   </div>
 </div>
+
+<script>
+var recipeId = $(".recipeList").attr("data-id"); //This creates a link with the recipe ID imbedded in the url
+$("#recipeLink").attr("href", "/recipe?recipe_id="+recipeId);
+</script>

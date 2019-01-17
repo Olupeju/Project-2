@@ -23,8 +23,19 @@ module.exports = function(app) {
     //});
   });
 
-  app.get("/recipe/", function(req, res) {
-    res.render("recipe");
+  //Recipe page
+  // URL is /recipe?recipe_id=2
+  app.get("/recipe", function(req, res) {
+    db.Recipe.findOne({
+      include: [db.Ingredients],
+      where: {
+        id: req.query.recipe_id //This gets the recipe_id following the question mark this is a query string parameter
+      }
+    }).then(function(dbRecipes) {
+      res.render("recipes", {
+        recipes: dbRecipes
+      });
+    });
   });
 
   // Render 404 page for any unmatched routes
