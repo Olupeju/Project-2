@@ -1,4 +1,29 @@
-<div class="container">
-  
-</div>
+<div id="home">
+    <div class="container">
 
+        <div class="row" id="topRow">
+            <div class="col-sm-8">
+                <h2>{{this.title[0]}}</h2>
+            </div>
+            <div class="col-sm-4">
+            <a href="/">
+                <button type="button" class="btn btn-primary btn-lg">Home Page
+                    <i class="fas fa-home"></i>
+                </button>
+            </a>
+            </div>
+        </div>
+
+    <div id="recipeList">
+        <ul>
+            {{#each recipes}}
+            <li>{{this.ingredient}}</li>
+            {{/each}}
+        </ul>
+    </div>
+    <div id ="descriptionDiv">
+        <p>{{this.description[0}}</p>
+    </div>
+
+  </div>
+</div>

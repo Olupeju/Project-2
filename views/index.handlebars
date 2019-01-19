@@ -2,27 +2,73 @@
 <div id="home">
   <div class="container">
 
-    <div class="row">
-      <div class="col-sm-9">
+    <div class="row" id="topRow">
+      <div class="col-sm-8">
         <h1>On-The-Go Recipes</h1>
       </div>
-      <div class="col-sm-3">
+      <div class="col-sm-4">
         <a href="/add">
-          <button type="button" class="btn btn-primary btn-lg">Add New Recipe</button>
+          <button type="button" class="btn btn-primary btn-lg">Add New Recipe
+            <i class="icon-food"></i>
+          </button>
         </a>
+      </div>
+    </div>
+    <hr>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <h3 id="heading">Current Recipes</h3>
+      </div>
+      <div class="col-sm-6" id="search">
+        <div class="form-group">
+          <label>View Recipe's by Region</label>
+          <select id="regionSelect" class="form-control" onchange="location = this.value;" return false;>
+            <option data-id="Italian" value="/?type=Italian"> Italian</option>
+            <option data-id="Asian" value="/?type=Asian"> Asian</option>
+            <option data-id="African" value="/?type=African"> African</option>
+            <option data-id="Mexican" value="/?type=Mexican"> Mexican</option>
+            <option data-id="European" value="/?type=European"> European</option>
+            <option data-id="American" value="/?type=American"> American</option>
+            <option data-id="Other" data-value="Other" value="/?type=Other"> Other</option>
+            <option data-id=="All" value="/"> All</option>
+          </select>
+        </div>
       </div>
     </div>
 
     <div class="row">
-      <div class="col-sm-12">
-        <h3>Current Recipes</h3>
-        <ul id="recipeList">
+      <div class="col-sm-12" id="recipeList">
+        <ul>
           {{#each recipes}}
-          <li data-id="{{this.id}}"><a href="/recipe">{{title}}</a></li>
+            <li class="recipeList" data-id="{{this.id}}"><a id="recipeLink" href="/recipe?recipe_id=">{{title}}</a></li>
           {{/each}}
         </ul>
       </div>
     </div>
-
+ 
   </div>
 </div>
+
+<script>
+var recipeId = $(".recipeList").attr("data-id"); //This creates a link with the recipe ID imbedded in the url
+$("#recipeLink").attr("href", "/recipe?recipe_id="+recipeId);
+
+var x = window.location.href;
+if(x == "http://localhost:3000/" || x == "http://localhost:3000/?type=All"){
+  $("#heading").html("All Recipes");
+}else if (x == "http://localhost:3000/?type=Italian"){
+  $("#heading").html("Italian Recipes");
+}else if (x == "http://localhost:3000/?type=African"){
+  $("#heading").html("African Recipes");
+}else if (x == "http://localhost:3000/?type=Mexican"){
+  $("#heading").html("Italian Recipes");
+}else if (x == "http://localhost:3000/?type=European"){
+  $("#heading").html("Italian Recipes");
+}else if (x == "http://localhost:3000/?type=Asian"){
+  $("#heading").html("Asian Recipes");
+}else if (x == "http://localhost:3000/?type=Other"){
+  $("#heading").html("Other Recipes");
+}
+
+</script>
