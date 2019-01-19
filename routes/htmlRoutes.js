@@ -3,12 +3,27 @@ var db = require("../models");
 module.exports = function(app) {
   // Load index page
   app.get("/", function(req, res) {
-    db.Recipe.findAll({}).then(function(dbRecipes) {
-      res.render("index", {
-        msg: "Welcome!",
-        recipes: dbRecipes
+    if (req.query.type) {
+      console.log("has query");
+      db.Recipe.findAll({
+        where: {
+          foodType: req.query.type
+        }
+      }).then(function(dbRecipes) {
+        res.render("index", {
+          msg: "Welcome!",
+          recipes: dbRecipes
+        });
       });
-    });
+    } else {
+      console.log("find all");
+      db.Recipe.findAll({}).then(function(dbRecipes) {
+        res.render("index", {
+          msg: "Welcome!",
+          recipes: dbRecipes
+        });
+      });
+    }
   });
 
   // Load example page and pass in an example by id

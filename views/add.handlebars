@@ -1,36 +1,75 @@
 <div class="container">
 
-  <div class="row">
-    <div class="col-sm-9">
+  <div class="row" id="topRow">
+    <div class="col-sm-8">
       <h2>Add New Recipe</h2>
     </div>
-    <div class="col-sm-3">
+    <div class="col-sm-4">
       <a href="/">
-          <button type="button" class="btn btn-primary btn-lg">Home Page</button>
+        <button type="button" class="btn btn-primary btn-lg">Home Page
+          <i class="fa fa-home" aria-hidden="true"></i>
+        </button>
     </a>
     </div>
   </div>
+  <hr>
 
    <div class="row">
-    <div class="col-sm-9"
-      <form>
-        <div class="form-group">
+    <div class="col-sm-12">
+      <div class="form-group">
           <label>Name Your Recipe</label>
           <input type="text" class="form-control" id="recipeName">
-        </div>
-        <div class="form-group">
+      </div>
+    </div>
+   </div>
+
+   <div class="row" id="imageRow">
+     <div class="col-sm-2 form-group">
           <label>Food Type</label>
-          <select class="form-control" id="foodType">
-            <option value="Italian">Italian</option>
-            <option value="Asian">Asian</option>
-            <option value="African">African</option>
-            <option value="Mexican">Mexican</option>
-            <option value="European">European</option>
-            <option value="American">American</option>
-            <option value="Other">Other</option>
-          </select>
+          <div class="drop_list">
+            <select name="mydropdown" id="dropdown" placeholder="Dropdown">
+                <option value="Italian">Italian</option>
+                <option value="Asian">Asian</option>
+                <option value="African">African</option>
+                <option value="Mexican">Mexican</option>
+                <option value="European">European</option>
+                <option value="American">American</option>
+                <option value="Other">Other</option>
+            </select>
+          </div>
         </div>
-        <div class="form-group" id="ingredients">
+        <div class="col-sm-3">
+          <span id="image" class="image-view">
+            <img src="https://serafinamia.com/wp-content/uploads/2018/09/10-Italian-Fun-Facts-The-Food-Fashion-and-Culture-of-Italy.jpg">
+          </span>
+          <span id="image1" class="image-view">
+          <img src="https://assets3.thrillist.com/v1/image/1868713/size/tmg-article_default_mobile.jpg">
+          </span>
+          <span id="image2" class="image-view">
+          <img src="http://smatfin.com/wp-content/uploads/2016/11/Jollof_rice_with_fried_fish_and_fried_plantain-1.jpg">
+          </span>
+          <span id="image3" class="image-view">
+          <img src="https://cdn.shopify.com/s/files/1/1771/2765/products/kess-tamales_530x.jpg?v=1513093618">
+          </span>
+          <span id="image4" class="image-view">
+          <img src="http://www.adrianstrattoria.com/ESW/Images/DeliciousEuropeanFood.jpg">
+          </span>
+          <span id="image5" class="image-view">
+          <img src="https://amp.thisisinsider.com/images/5ad792ffbd967146008b45d9-750-562.jpg">
+        </span>
+        <span id="image6" class="image-view">
+        <img src="">
+        </span>
+      </div>
+      <div class="col-sm-7">
+         <div class="form-group">
+          <label id="descriptionLabel">Description</label>
+          <textarea name="description" id="description" rows="8" cols="40"></textarea>
+        </div>
+      </div>
+    </div>
+            
+    <div class="form-group" id="ingredients">
           <label>Add Ingredients</label>
           <input class="form-control" id="ingredient1">
         </div>
@@ -54,3 +93,51 @@
     console.log(newIngredient);
   });
 </script>
+<script>
+  $(document).ready(function() {
+  $("#dropdown").on("change", function() {
+    $("#image,#image1,#image2,#image3,#image4,#image5,#image6").hide();
+   if ( this.value === "Italian") 
+   {
+      $("#image").show();
+   }
+   else if(this.value === "Asian")
+   {
+       $("#image1").show();
+   }
+   else if(this.value === "African")
+   {
+     $("#image2").show();
+   }
+   else if(this.value === "Mexican")
+   {
+     $("#image3").show();
+   }
+   else if(this.value === "European")
+   {
+     $("#image4").show();
+   }
+   else if(this.value === "American")
+   {
+     $("#image5").show();
+   }
+   else if(this.value === "Other")
+   {
+     $("#image6").show();
+   }
+  else
+   {
+      $("#image").hide();
+      $("#image1").hide();
+      $("#image2").hide();
+      $("#image3").hide();
+      $("#image4").hide();
+      $("#image5").hide();
+      $("#image6").hide();
+   }
+ })
+  .change();
+});
+</script>
+
+
