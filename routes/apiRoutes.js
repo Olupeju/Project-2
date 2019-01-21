@@ -22,20 +22,18 @@ module.exports = function(app) {
   // Create a new recipe
   app.post("/api/recipes", function(req, res) {
     db.Recipe.create({
-      title: req.body.title,
+      title: req.body.recipeName,
       foodType: req.body.foodType,
       description: req.body.description
-    }).then(function(dbRecipe) {
-      res.json(dbRecipe);
-    });
-  });
-
-  // Create new ingredients. How does it know which recipe it is associated with
-  app.post("/api/ingredients", function(req, res) {
-    db.Ingredients.create({
-      ingredient: req.body.ingredient
-    }).then(function(dbIngredient) {
-      res.json(dbIngredient);
+    }).then(function(data){
+      console.log(data.dataValues.id);
+      for(i = 0; i < req.body['ingredient[]'].length; i++) {
+        db.Ingredients.create({
+          ingredient: req.body['ingredient[]'][i],
+          RecipeId: data.dataValues.id
+        });
+      }
+      res.json({});
     });
   });
 

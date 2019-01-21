@@ -71,28 +71,17 @@
             
     <div class="form-group" id="ingredients">
           <label>Add Ingredients</label>
-          <input class="form-control" id="ingredient1">
+          <input class="form-control" id="ingredient">
         </div>
         <button class="btn btn-primary btn-sm" type="button" id="addIngredient">Add Another Ingredient</button>
         <br>
         <br>
-        <button class="btn btn-primary btn-lg" type="submit" action="/api/recipes" method="post">Submit</buttom>
+        <button class="btn btn-primary btn-lg" type="submit" id="subBtn">Submit</buttom>
       </form>
     </div>
   </div>
 </div>
 
-<script>
-  var ingredientNum = 2;
-  $("#addIngredient").on("click", function() {
-    event.preventDefault();
-    var ingredientId = "ingredient" + ingredientNum;
-    var newIngredient = $("<input class='form-control' id='" + ingredientId + "'>");
-    $("#ingredients").append(newIngredient);
-    ingredientNum++;
-    console.log(newIngredient);
-  });
-</script>
 <script>
   $(document).ready(function() {
   $("#dropdown").on("change", function() {
