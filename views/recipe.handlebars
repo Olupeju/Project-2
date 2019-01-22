@@ -3,7 +3,7 @@
 
         <div class="row" id="topRow">
             <div class="col-sm-8">
-                <h2>{{this.title[0]}}</h2>
+                <h2>{{recipes.title}}</h2>
             </div>
             <div class="col-sm-4">
             <a href="/">
@@ -16,13 +16,13 @@
 
     <div id="recipeList">
         <ul>
-            {{#each recipes}}
-            <li>{{this.ingredient}}</li>
+            {{#each recipes.Ingredients}}
+            <li>{{ingredient}}</li>
             {{/each}}
         </ul>
     </div>
     <div id ="descriptionDiv">
-        <p>{{this.description[0}}</p>
+        <p>{{recipes.description}}</p>
     </div>
 
   </div>
