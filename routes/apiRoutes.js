@@ -25,11 +25,11 @@ module.exports = function(app) {
       title: req.body.recipeName,
       foodType: req.body.foodType,
       description: req.body.description
-    }).then(function(data){
+    }).then(function(data) {
       console.log(data.dataValues.id);
-      for(i = 0; i < req.body['ingredient[]'].length; i++) {
+      for(i = 0; i < req.body["ingredient[]"].length; i++) {
         db.Ingredients.create({
-          ingredient: req.body['ingredient[]'][i],
+          ingredient: req.body["ingredient[]"[i],
           RecipeId: data.dataValues.id
         });
       }
