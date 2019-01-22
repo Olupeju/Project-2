@@ -16,13 +16,13 @@
 
     <div id="recipeList">
         <ul>
-            {{#each recipes}}
-            <li>{{this.ingredient}}</li>
+            {{#each recipes.Ingredients}}
+            <li>{{ingredient}}</li>
             {{/each}}
         </ul>
     </div>
     <div id ="descriptionDiv">
-        <p>{{this.description}}</p>
+        <p>{{recipes.description}}</p>
     </div>
 
   </div>

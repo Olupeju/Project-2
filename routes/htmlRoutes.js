@@ -47,10 +47,9 @@ module.exports = function(app) {
       where: {
         id: req.query.recipe_id //This gets the recipe_id following the question mark this is a query string parameter
       }
-    }).then(function(dbIngredients) {
-      console.log(dbIngredients);
+    }).then(function(dbRecipes) {
       res.render("recipe", {
-        recipes: dbIngredients
+        recipes: dbRecipes
       });
     });
   });

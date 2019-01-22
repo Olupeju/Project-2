@@ -27,13 +27,14 @@ module.exports = function(app) {
       description: req.body.description
     }).then(function(data) {
       console.log(data.dataValues.id);
-      for(i = 0; i < req.body["ingredient[]"].length; i++) {
+      for (i = 0; i < req.body["ingredient[]"].length; i++) {
         db.Ingredients.create({
           ingredient: req.body["ingredient[]"][i],
           RecipeId: data.dataValues.id
         });
-      }
-      res.json({});
+      };
+      console.log("redirect");
+      res.redirect("/");
     });
   });
 
@@ -41,12 +42,13 @@ module.exports = function(app) {
   app.get("/api/ingredients/:id", function(req, res) {
     //Add a join to include all ingredients here
     db.Recipe.findOne({
-      include: [db.Ingredients],
       where: {
-        id: req.params.id //This gets the recipe_id following the question mark this is a query string parameter
-      }
-    }).then(function(dbIngredients) {
-      res.json(dbIngredients);
+        id: req.params.id
+      },
+      include: [db.Ingredients]
+    }).then(function(dbRecipe) {
+      console.log(dbRecipe);
+      res.json(dbRecipe);
     });
   });
 
