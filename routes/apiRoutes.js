@@ -29,7 +29,7 @@ module.exports = function(app) {
       console.log(data.dataValues.id);
       for(i = 0; i < req.body["ingredient[]"].length; i++) {
         db.Ingredients.create({
-          ingredient: req.body["ingredient[]"[i],
+          ingredient: req.body["ingredient[]"][i],
           RecipeId: data.dataValues.id
         });
       }
@@ -38,15 +38,15 @@ module.exports = function(app) {
   });
 
   // Get specific recipe with ingredients
-  app.get("/api/recipes/:id", function(req, res) {
+  app.get("/api/ingredients/:id", function(req, res) {
     //Add a join to include all ingredients here
     db.Recipe.findOne({
       include: [db.Ingredients],
       where: {
-        id: req.params.id
+        id: req.params.id //This gets the recipe_id following the question mark this is a query string parameter
       }
-    }).then(function(dbRecipe) {
-      res.json(dbRecipe);
+    }).then(function(dbIngredients) {
+      res.json(dbIngredients);
     });
   });
 
