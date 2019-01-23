@@ -32,7 +32,7 @@ module.exports = function(app) {
           ingredient: req.body["ingredient[]"][i],
           RecipeId: data.dataValues.id
         });
-      };
+      }
       console.log("redirect");
       res.redirect("/");
     });
@@ -48,6 +48,19 @@ module.exports = function(app) {
       include: [db.Ingredients]
     }).then(function(dbRecipe) {
       console.log(dbRecipe);
+      res.json(dbRecipe);
+    });
+  });
+
+  //Get recipes by foodtype with count for d3 bubble chart
+  app.get("/api/count", function(req, res) {
+    db.Recipe.findAll({
+      attributes: [
+        "foodtype",
+        [db.sequelize.fn("COUNT", db.sequelize.col("foodtype")), "value"]
+      ],
+      group: ["foodtype"]
+    }).then(function(dbRecipe) {
       res.json(dbRecipe);
     });
   });

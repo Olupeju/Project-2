@@ -40,6 +40,7 @@ module.exports = function(app) {
 
   //Recipe page
   // URL is /recipe?recipe_id=2
+
   app.get("/recipe", function(req, res) {
     db.Recipe.findOne({
       include: [db.Ingredients],
@@ -48,7 +49,7 @@ module.exports = function(app) {
       }
     }).then(function(dbRecipes) {
       res.render("recipe", {
-        recipes: dbRecipes,
+        recipes: dbRecipes
       });
     });
   });

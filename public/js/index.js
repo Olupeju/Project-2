@@ -98,7 +98,7 @@ var handleDeleteBtnClick = function() {
 // $submitBtn.on("click", handleFormSubmit);
 // $exampleList.on("click", ".delete", handleDeleteBtnClick);
 
-$(function(){
+$(function() {
   $("#addIngredient").on("click", function(event) {
     event.preventDefault();
     var newIngredient = $("<input class='form-control' name='ingredient'>");
@@ -115,11 +115,17 @@ $(function(){
     var rcpNm = $("#recipeName").val();
     var fdTyp = $("#dropdown").val();
     var dscrptn = $("#description").val();
-    $.post("/api/recipes", {
-      recipeName: rcpNm,
-      foodType: fdTyp,
-      description: dscrptn,
-      ingredient: ingredientArray
-    });
+    $.post(
+      "/api/recipes",
+      {
+        recipeName: rcpNm,
+        foodType: fdTyp,
+        description: dscrptn,
+        ingredient: ingredientArray
+      },
+      function() {
+        window.location.href = "/";
+      }
+    );
   });
 });

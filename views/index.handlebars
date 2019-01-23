@@ -15,39 +15,31 @@
       </div>
     </div>
     <hr>
-
+    
     <div class="row">
       <div class="col-sm-6">
-        <h3 id="heading">Current Recipes</h3>
+        <div class="row justify-content-center" id="search">
+          <p class="text-xs-center">Select a region below, or <a href="http://localhost:3000/">view all.</a></p>
+          <div class="bubbleChart" id="center"></div>
+        </div>
       </div>
-      <div class="col-sm-6" id="search">
-        <div class="form-group">
-          <label>View Recipe's by Region</label>
-          <select id="regionSelect" class="form-control" onchange="location = this.value;" return false;>
-            <option data-id="Italian" value="/?type=Italian"> Italian</option>
-            <option data-id="Asian" value="/?type=Asian"> Asian</option>
-            <option data-id="African" value="/?type=African"> African</option>
-            <option data-id="Mexican" value="/?type=Mexican"> Mexican</option>
-            <option data-id="European" value="/?type=European"> European</option>
-            <option data-id="American" value="/?type=American"> American</option>
-            <option data-id="Other" data-value="Other" value="/?type=Other"> Other</option>
-            <option data-id=="All" value="/"> All</option>
-          </select>
+      <div class="col-sm-6">
+        <div class="row justify-content-center">
+          <h3 id="heading">Current Recipes</h3>
+        </div>
+        <div class="row justify-content-center">
+          <div id="recipeList" id="center">
+            <ul>
+              {{#each recipes}}
+                <li class="recipeList" data-id="{{this.id}}"><a id="recipeLink" href="/recipe?recipe_id={{this.id}}">{{title}}</a></li>
+              {{/each}}
+            </ul>
+          </div>
         </div>
       </div>
     </div>
-
-    <div class="row">
-      <div class="col-sm-12" id="recipeList">
-        <ul>
-          {{#each recipes}}
-            <li class="recipeList" data-id="{{this.id}}"><a id="recipeLink" href="/recipe?recipe_id=">{{title}}</a></li>
-          {{/each}}
-        </ul>
-      </div>
-    </div>
- 
   </div>
+</div>
 </div>
 
 <script>
@@ -62,13 +54,89 @@ if(x == "http://localhost:3000/" || x == "http://localhost:3000/?type=All"){
 }else if (x == "http://localhost:3000/?type=African"){
   $("#heading").html("African Recipes");
 }else if (x == "http://localhost:3000/?type=Mexican"){
-  $("#heading").html("Italian Recipes");
+  $("#heading").html("Mexican Recipes");
 }else if (x == "http://localhost:3000/?type=European"){
-  $("#heading").html("Italian Recipes");
+  $("#heading").html("European Recipes");
 }else if (x == "http://localhost:3000/?type=Asian"){
   $("#heading").html("Asian Recipes");
 }else if (x == "http://localhost:3000/?type=Other"){
   $("#heading").html("Other Recipes");
+}else if (x == "http://localhost:3000/?type=American"){
+  $("#heading").html("American Recipes");
 }
+
+//bubble chart
+//var dataset = {"children": 
+//  [{'foodtype': 'Italian', 'value': 3},
+//  {'foodtype': 'Mexican', 'value': 2},
+//  {'foodtype': 'Asian', 'value': 1},
+//  {'foodtype': 'American', 'value':4},
+//  {'foodtype': 'European', 'value':1},
+//  {'foodtype': 'Other', 'value':2}]
+//};
+    $.get("/api/count", function(data) { //Get recipe data from API use this for bubble chart
+      var dataset = {"children": data};
+
+          var diameter = 200;
+    //var color = d3.scaleOrdinal(d3.schemeCategory20);
+
+    var bubble = d3.pack(dataset)
+            .size([diameter, diameter])
+            .padding(1.5);
+    var svg = d3.select(".bubbleChart")
+            .append("svg")
+            .attr("width", diameter*2)
+            .attr("height", diameter)
+            .attr("class", "bubble");
+    
+    
+
+    var nodes = d3.hierarchy(dataset)
+            .sum(function(d) { return d.value; });
+
+    var node = svg.selectAll(".node")
+            .data(bubble(nodes).descendants())
+            .enter()
+            .filter(function(d){
+                return  !d.children
+            })
+            .append("g")
+            .attr("class", "node")
+            .attr("transform", function(d) {
+                return "translate(" + d.x + "," + d.y + ")";
+            });
+
+    node.append("title")
+            .text(function(d) {
+                return d.foodtype + ": " + d.value;
+            });
+
+    node.append("a")
+            .attr("xlink:href", function(d) {
+              return "/?type=" + d.data.foodtype;
+            })
+            .append("circle")
+            .attr("r", function(d) {
+                return d.r;
+            })
+            .style("fill", function(d) {
+                return "#2DD7EB";
+            });
+
+    node.append("text")
+            .attr("dy", ".3em")
+            .style("text-anchor", "middle")
+            .style("pointer-events", "none")
+            .text(function(d) {
+                return d.data.foodtype.substring(0, d.r / 3);
+            });
+
+    d3.select(self.frameElement)
+            .style("height", diameter + "px");
+      
+    });
+
+
+
 
 </script>

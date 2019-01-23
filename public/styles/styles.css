@@ -19,7 +19,7 @@ h1 h2 {
   padding-top: 5px;
 }
 
-#heading {
+#heading .bubbleChart {
   text-align: center;
 }
 #search {
@@ -41,4 +41,12 @@ img {
 
 #description {
   display: block;
+}
+
+#center {
+  text-align: center;
+}
+
+p {
+  text-align: center;
 }
