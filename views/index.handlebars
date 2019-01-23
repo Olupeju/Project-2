@@ -18,24 +18,28 @@
     
     <div class="row">
       <div class="col-sm-6">
-        <h3 id="heading">Current Recipes</h3>
+        <div class="row justify-content-center" id="search">
+          <p class="text-xs-center">Select a region below, or <a href="http://localhost:3000/">view all.</a></p>
+          <div class="bubbleChart" id="center"></div>
+        </div>
       </div>
-      <div class="col-sm-6" id="search">
-        <div class="bubbleChart"></div>
+      <div class="col-sm-6">
+        <div class="row justify-content-center">
+          <h3 id="heading">Current Recipes</h3>
+        </div>
+        <div class="row justify-content-center">
+          <div id="recipeList" id="center">
+            <ul>
+              {{#each recipes}}
+                <li class="recipeList" data-id="{{this.id}}"><a id="recipeLink" href="/recipe?recipe_id={{this.id}}">{{title}}</a></li>
+              {{/each}}
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
-
-    <div class="row">
-      <div class="col-sm-12" id="recipeList">
-        <ul>
-          {{#each recipes}}
-            <li class="recipeList" data-id="{{this.id}}"><a id="recipeLink" href="/recipe?recipe_id=">{{title}}</a></li>
-          {{/each}}
-        </ul>
-      </div>
-    </div>
- 
   </div>
+</div>
 </div>
 
 <script>

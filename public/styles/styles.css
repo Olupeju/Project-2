@@ -42,3 +42,11 @@ img {
 #description {
   display: block;
 }
+
+#center {
+  text-align: center;
+}
+
+p {
+  text-align: center;
+}
