@@ -62,26 +62,18 @@ if(x == "http://localhost:3000/" || x == "http://localhost:3000/?type=All"){
 }
 
 //bubble chart
-var dataset = {"children": 
-  [{'foodtype': 'Italian', 'value': 3},
-  {'foodtype': 'Mexican', 'value': 2},
-  {'foodtype': 'Asian', 'value': 1},
-  {'foodtype': 'American', 'value':4},
-  {'foodtype': 'European', 'value':1},
-  {'foodtype': 'Other', 'value':2}]
-};
-    $.get("/api/recipes/count", function(data) { //Get recipe data from API use this for bubble chart
-      console.log("Recipes: ", data);
-      //posts = data;
-      //if (!posts || !posts.length) {
-      //  displayEmpty(author);
-      //}
-      //else {
-      //  initializeRows();
-      //}
-    });
+//var dataset = {"children": 
+//  [{'foodtype': 'Italian', 'value': 3},
+//  {'foodtype': 'Mexican', 'value': 2},
+//  {'foodtype': 'Asian', 'value': 1},
+//  {'foodtype': 'American', 'value':4},
+//  {'foodtype': 'European', 'value':1},
+//  {'foodtype': 'Other', 'value':2}]
+//};
+    $.get("/api/count", function(data) { //Get recipe data from API use this for bubble chart
+      var dataset = {"children": data};
 
-    var diameter = 200;
+          var diameter = 200;
     //var color = d3.scaleOrdinal(d3.schemeCategory20);
 
     var bubble = d3.pack(dataset)
@@ -127,15 +119,6 @@ var dataset = {"children":
                 return "#2DD7EB";
             });
 
-
-  //  node.append("circle")
-  //          .attr("r", function(d) {
-  //              return d.r;
-  //          })
-  //          .style("fill", function(d) {
-  //              return "#2DD7EB";
-  //          });
-
     node.append("text")
             .attr("dy", ".3em")
             .style("text-anchor", "middle")
@@ -146,10 +129,10 @@ var dataset = {"children":
 
     d3.select(self.frameElement)
             .style("height", diameter + "px");
+      
+    });
 
 
-    //convert numerical values from strings to numbers
-    //data = data.map(function(d){ d.value = +d["Amount"]; return d; });
 
 
 </script>
